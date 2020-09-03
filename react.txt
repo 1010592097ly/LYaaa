@@ -1,0 +1,19 @@
+跨域问题的代理问题
+    第一种 抽离 yarn eject
+        在config中的webpackDevServer.config文件里添加代理
+        proxy:{
+        "/api":{
+            target:"http://47.96.0.211:9000",
+            changeOrigin:true,
+            pathRewrite:{
+            "^/api":""
+            }
+        }
+    第二种 无需抽离,需要创建一个setupProxy.js文件
+    const { createProxyMiddleware } = require('http-proxy-middleware');
+
+        module.exports = function(app){
+            app.use("/api",
+                createProxyMiddleware({ target: 'http://47.96.0.211:9000', changeOrigin: true , pathRewrite:{ "^/api":"" } })
+            )
+        }

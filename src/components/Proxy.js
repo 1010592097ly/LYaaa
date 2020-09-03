@@ -12,7 +12,7 @@ export default class Proxy extends Component {
         // })
 
         //跨域请求 通过yarn eject进行react-script相关文件配置的抽离
-        axios.get("http://47.96.0.211:9000/db/in_theaters?limit=8&page=2").then(res => {
+        axios.get("/api/db/in_theaters?limit=8&page=2").then(res => {
             console.log(res)
         })
     }

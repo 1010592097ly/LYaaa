@@ -1,0 +1,27 @@
+1.挂载阶段的钩子函数
+    (1)constructor 
+        两个作用:1初始化组件的状态
+                2可以给一些事件函数绑定this
+        不能在内部执行setState
+
+    (2)getDerivedStateFromProps(从属性中获取派生状态)
+        这个钩子函数无法访问this
+        这个钩子函数返回什么,状态就是什么
+        如果你的组件某个状态就想由外部传入的属性关联控制,希望属性改变了,组件内部的状态也发生变化,那么
+        就把这个状态变成派生状态,是次钩子函数即可
+        执行时机: props | setState | forceUpdate 都会执行
+
+    (3)render
+        什么时候执行:
+            1,初始化会执行一次
+            2.外部传入props的时候执行
+            3.组件内部调用setState的时候
+            4.调用foceUpdate()时候执行
+
+    (4)componentDidMount
+        组件挂载完毕了 可以在这个钩子函数里进行异步操作
+    
+    (5)UNSAFE_componentWillMount (即将过时的钩子函数)
+        受到react 16.x版本 Fiber协调算法,就会导致这个钩子函数可能会执行多次
+        所以不要把异步请求放在这个钩子函数里,显然是不合理的
+        异步请求放在componentDidMount只会执行一次,这是合情合理的
